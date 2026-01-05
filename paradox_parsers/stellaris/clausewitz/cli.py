@@ -39,9 +39,6 @@ def cli_parse(argv=None) -> int:
     else:
         raise RuntimeError(f"Filepath is required")
 
-    if not gamestate.name == "gamestate":
-        raise RuntimeError(f"Filepath must be of type: 'gamestate'")
-
     if _db:
         db = Path(_db)
     else:
