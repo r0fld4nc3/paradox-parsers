@@ -1,0 +1,28 @@
+[project]
+name = "paradox-parsers"
+version = "0.1.0"
+description = "Parsers for data serialisation of Paradox Interactive gamestate files to a SQLite database to then be able to regenerate a new gamestate file from it with as little loss of data as possible."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Artur Rosario" }]
+maintainers = [{ name = "Artur Rosario" }]
+keywords = [
+    "paradox",
+    "interactive",
+    "parser",
+    "gamestate",
+    "save",
+    "game",
+    "stellaris",
+]
+requires-python = ">= 3.8"
+
+[project.urls]
+Homepage = "https://github.com/r0fld4nc3/paradox-parsers.git"
+Repository = "https://github.com/r0fld4nc3/paradox-parsers.git"
+
+[project.scripts]
+parse-gamestate = "paradox-parsers.stellaris.cli:cli_parse"
+
+[tool.setuptools.package-data]
+paradox-parsers = ["**/*.sql"]
