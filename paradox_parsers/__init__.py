@@ -4,11 +4,12 @@ __version__ = "0.1.0"
 
 import logging
 
-from .stellaris import cli_parse, parse_gamestate_to_sqlite
+from .stellaris import cli_parse, parse_gamestate_to_sqlite, GamestateWriter
 
 __all__ = [
     "cli_parse",
     "parse_gamestate_to_sqlite",
+    "GamestateWriter"
 ]
 
 logger = logging.getLogger(__name__)

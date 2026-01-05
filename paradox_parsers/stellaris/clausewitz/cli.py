@@ -15,7 +15,7 @@ def parse_args(argv=None):
     return p.parse_args(argv)
 
 
-def cli_parse(argv=None):
+def cli_parse(argv=None) -> int:
     """
     Provide a filepath to a Stellaris `gamestate` file to serialise to a SQLite database.
 
@@ -57,6 +57,8 @@ def cli_parse(argv=None):
 
     time_taken = round(time.time() - start, 3)
     log.info(f"Done in {time_taken}s")
+
+    return root_id
 
 
 if __name__ == "__main__":

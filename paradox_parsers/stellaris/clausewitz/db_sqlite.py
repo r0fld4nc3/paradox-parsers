@@ -2,19 +2,9 @@ from __future__ import annotations
 
 import sqlite3
 from dataclasses import dataclass
-from enum import Enum
 from importlib import resources
 from typing import Optional
-
-
-class InsertKind(Enum):
-    assign = "assign"
-    val = "value"
-
-
-class ValueKind(Enum):
-    scalar = "scalar"
-    block = "block"
+from .kinds import InsertKind, ValueKind
 
 
 @dataclass
