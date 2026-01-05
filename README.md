@@ -1,4 +1,4 @@
-# pdx-parsers
+# paradox-parsers
 
 A collection of parsers for Paradox Interacive's gamestate files to a SQLite database so that it is possible to modify and regenerate a gamestate file with as little data loss as possible.
 
