@@ -50,11 +50,12 @@ class SqliteSink:
         scalar_text: Optional[str],
         scalar_quoted: int,
         child_block_id: Optional[int],
+        source_line: int
     ) -> None:
         ctx = self.stack[-1]
         self.db.execute(
             """
-            INSERT INTO item(block_id, order_index, kind, key_text, value_kind, scalar_text, scalar_quoted, child_block_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO item(block_id, order_index, kind, key_text, value_kind, scalar_text, scalar_quoted, child_block_id, source_line) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 ctx.block_id,
@@ -65,11 +66,12 @@ class SqliteSink:
                 scalar_text,
                 scalar_quoted,
                 child_block_id,
+                source_line
             ),
         )
         ctx.next_order_index += 1
 
-    def assign_scalar(self, key_text: str, scalar_text: str, scalar_quoted: bool) -> None:
+    def assign_scalar(self, key_text: str, scalar_text: str, scalar_quoted: bool, source_line: int) -> None:
         self._push_item(
             kind=InsertKind.assign.value,
             key_text=key_text,
@@ -77,9 +79,10 @@ class SqliteSink:
             scalar_text=scalar_text,
             scalar_quoted=1 if scalar_quoted else 0,
             child_block_id=None,
+            source_line=source_line
         )
 
-    def assign_block(self, key_text: str, child_block_id: int) -> None:
+    def assign_block(self, key_text: str, child_block_id: int, source_line: int) -> None:
         self._push_item(
             kind=InsertKind.assign.value,
             key_text=key_text,
@@ -87,9 +90,10 @@ class SqliteSink:
             scalar_text=None,
             scalar_quoted=0,
             child_block_id=child_block_id,
+            source_line=source_line
         )
 
-    def value_scalar(self, scalar_text: str, scalar_quoted: bool) -> None:
+    def value_scalar(self, scalar_text: str, scalar_quoted: bool, source_line: int) -> None:
         self._push_item(
             kind=InsertKind.val.value,
             key_text=None,
@@ -97,9 +101,10 @@ class SqliteSink:
             scalar_text=scalar_text,
             scalar_quoted=1 if scalar_quoted else 0,
             child_block_id=None,
+            source_line=source_line
         )
 
-    def value_block(self, child_block_id: int) -> None:
+    def value_block(self, child_block_id: int, source_line: int) -> None:
         self._push_item(
             kind=InsertKind.val.value,
             key_text=None,
@@ -107,4 +112,5 @@ class SqliteSink:
             scalar_text=None,
             scalar_quoted=0,
             child_block_id=child_block_id,
+            source_line=source_line
         )

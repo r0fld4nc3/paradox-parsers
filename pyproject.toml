@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "paradox-parsers"
-version = "0.1.0"
+version = "0.2.0"
 description = "Parsers for data serialisation of Paradox Interactive gamestate files to a SQLite database to then be able to regenerate a new gamestate file from it with as little loss of data as possible."
 readme = "README.md"
 license = { file = "LICENSE" }
