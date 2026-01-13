@@ -1,35 +1,8 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-from enum import Enum, auto
-from typing import Iterator, Optional, TextIO
+from typing import Iterator, TextIO
 
-
-class CharKind(Enum):
-    LBRACE = "{"
-    RBRACE = "}"
-    EQUALS = "="
-    QUOTED_STRING = '"'
-    EOF = ""
-    SEQ_ESCAPE = "\\"
-
-
-class TokenKind(Enum):
-    LBRACE = auto()  # {
-    RBRACE = auto()  # }
-    EQUALS = auto()  # =
-    ATOM = auto()  # identifier/number/bareword (as raw text)
-    STRING = auto()  # "..."
-    EOF = auto()
-
-
-@dataclass(frozen=True)
-class Token:
-    kind: TokenKind
-    text: str  # Raw token text for ATOM, decoded inner for STRING
-    quoted: bool = False  # Set to True only for STRING
-    line: int = 1
-    col: int = 0
+from .kinds import CharKind, Token, TokenKind
 
 
 class LexerError(RuntimeError):
